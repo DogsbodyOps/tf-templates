@@ -1,5 +1,5 @@
 resource "azurerm_virtual_network" "this" {
-  name                = "${var.name}-vnet"
+  name                = "${var.project}-vnet"
   address_space       = ["10.0.0.0/24"]
   location            = var.location
   resource_group_name = var.resource_group_name
@@ -7,14 +7,14 @@ resource "azurerm_virtual_network" "this" {
 }
 
 resource "azurerm_subnet" "this" {
-  name                 = "${var.name}-subnet"
+  name                 = "${var.project}-subnet"
   resource_group_name  = var.resource_group_name
   virtual_network_name = azurerm_virtual_network.this.name
   address_prefixes     = ["10.0.0.0/24"]
 }
 
 resource "azurerm_network_security_group" "this" {
-  name                = "${var.name}-nsg"
+  name                = "${var.project}-nsg"
   location            = var.location
   resource_group_name = var.resource_group_name
   tags                = var.tags
@@ -41,7 +41,7 @@ resource "azurerm_subnet_network_security_group_association" "this" {
 }
 
 resource "azurerm_public_ip" "this" {
-  name                = "${var.name}-pip"
+  name                = "${var.project}-pip"
   location            = var.location
   resource_group_name = var.resource_group_name
   allocation_method   = "Static"
@@ -50,7 +50,7 @@ resource "azurerm_public_ip" "this" {
 }
 
 resource "azurerm_network_interface" "this" {
-  name                = "${var.name}-nic"
+  name                = "${var.project}-nic"
   location            = var.location
   resource_group_name = var.resource_group_name
   tags                = var.tags
@@ -64,7 +64,7 @@ resource "azurerm_network_interface" "this" {
 }
 
 resource "azurerm_linux_virtual_machine" "this" {
-  name                  = "${var.name}-vm"
+  name                  = "${var.project}-vm"
   location              = var.location
   resource_group_name   = var.resource_group_name
   size                  = var.vm_size

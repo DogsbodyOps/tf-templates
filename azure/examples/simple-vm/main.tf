@@ -1,5 +1,13 @@
-provider "azurerm" {
-  features {}
+variable "project" {
+  type = string
+}
+
+variable "subscription_id" {
+  type = string
+}
+
+variable "tenant_id" {
+  type = string
 }
 
 variable "admin_username" {
@@ -15,15 +23,21 @@ variable "allowed_ssh_ips" {
   type = list(string)
 }
 
+provider "azurerm" {
+  features {}
+  subscription_id = var.subscription_id
+  tenant_id       = var.tenant_id
+}
+
 resource "azurerm_resource_group" "this" {
-  name     = "my-project-rg"
+  name     = "${var.project}-rg"
   location = "uksouth"
 }
 
 module "vm" {
   source = "git::https://github.com/DogsbodyOps/tf-templates.git//azure/modules/simple-vm?ref=main"
 
-  name                = "my-project"
+  project             = var.project
   location            = azurerm_resource_group.this.location
   resource_group_name = azurerm_resource_group.this.name
   admin_username      = var.admin_username

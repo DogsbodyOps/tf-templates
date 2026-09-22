@@ -19,7 +19,7 @@ Provisions a Standard_B1s Ubuntu 22.04 VM with a public IP and an NSG that restr
 
 | Name | Type | Default | Description |
 |------|------|---------|-------------|
-| `name` | `string` | — | Base name for all resources |
+| `project` | `string` | — | Project name — prefix for all resources and resource group |
 | `resource_group_name` | `string` | — | Resource group to deploy into |
 | `admin_username` | `string` | — | VM admin username |
 | `public_key` | `string` | — | SSH public key content |
@@ -42,7 +42,7 @@ Provisions a Standard_B1s Ubuntu 22.04 VM with a public IP and an NSG that restr
 module "vm" {
   source = "git::https://github.com/DogsbodyOps/tf-templates.git//azure/modules/simple-vm?ref=main"
 
-  name                = "my-project"
+  project             = "my-project"
   location            = "uksouth"
   resource_group_name = azurerm_resource_group.this.name
   admin_username      = var.admin_username
