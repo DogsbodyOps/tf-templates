@@ -1,10 +1,9 @@
 terraform {
   backend "s3" {
-    bucket                      = var.bucket
-    key                         = var.key
-    region                      = var.region
+    bucket                      = "backblaze-backend"
+    region                      = "eu-central-003"
     endpoints = {
-      s3 = var.endpoints["s3"]
+      s3 = "s3.eu-central-003.backblazeb2.com"
     }
     skip_credentials_validation = true
     skip_region_validation      = true
