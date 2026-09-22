@@ -21,7 +21,7 @@ resource "azurerm_resource_group" "this" {
 }
 
 module "vm" {
-  source = "git::https://github.com/your-org/tf-templates-azure.git//modules/simple-vm?ref=main"
+  source = "git::https://github.com/DogsbodyOps/tf-templates.git//azure/modules/simple-vm?ref=main"
 
   name                = "my-project"
   location            = azurerm_resource_group.this.location

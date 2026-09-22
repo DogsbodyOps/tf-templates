@@ -40,7 +40,7 @@ Provisions a Standard_B1s Ubuntu 22.04 VM with a public IP and an NSG that restr
 
 ```hcl
 module "vm" {
-  source = "git::https://github.com/your-org/tf-templates-azure.git//modules/simple-vm?ref=v1.0.0"
+  source = "git::https://github.com/DogsbodyOps/tf-templates.git//azure/modules/simple-vm?ref=main"
 
   name                = "my-project"
   location            = "uksouth"
