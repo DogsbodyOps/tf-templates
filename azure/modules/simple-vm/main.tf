@@ -33,6 +33,21 @@ resource "azurerm_network_security_group" "this" {
       destination_address_prefix = "*"
     }
   }
+
+  dynamic "security_rule" {
+    for_each = var.nsg_security_rules
+    content {
+      name                       = security_rule.key
+      priority                   = security_rule.value.priority
+      direction                  = security_rule.value.direction
+      access                     = security_rule.value.access
+      protocol                   = security_rule.value.protocol
+      source_port_range          = "*"
+      destination_port_ranges    = security_rule.value.destination_port_ranges
+      source_address_prefixes    = security_rule.value.source_address_prefixes
+      destination_address_prefix = security_rule.value.destination_address_prefix
+    }
+  }
 }
 
 resource "azurerm_subnet_network_security_group_association" "this" {
